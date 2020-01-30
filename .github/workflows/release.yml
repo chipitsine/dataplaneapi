@@ -35,4 +35,23 @@ jobs:
           release_name: Release ${{ github.ref }}
           draft: false
           prerelease: false
-          artifacts: [ dataplaneapi-mac, dataplaneapi-linux64, dataplaneapi-freebsd ]
+
+      - name: Upload Mac artifacts 
+        uses: actions/upload-artifact@v1
+        with:
+          name: dataplaneapi-mac
+          path: dataplaneapi-mac
+
+      - name: Upload Linux artifacts 
+        uses: actions/upload-artifact@v1
+        with:
+          name: dataplaneapi-linux64
+          path: dataplaneapi-linux64
+
+      - name: Upload FreeBSD artifacts   
+        uses: actions/upload-artifact@v1
+        with:
+          name: dataplaneapi-freebsd
+          path: dataplaneapi-freebsd
+
+
