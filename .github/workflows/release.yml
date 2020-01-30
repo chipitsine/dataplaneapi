@@ -12,6 +12,19 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@master
+      - name: Set up Go 1.13
+        uses: actions/setup-go@v1
+        with:
+          go-version: 1.13
+        id: go
+      - name: Get dependencies
+        run: |
+          go get -v -t -d ./...
+      - name: Build
+        run: |
+          GOOS=darwin go -o dataplaneapi-mac build -v .
+          GOOS=linux GOARCH=amd64 go -o dataplaneapi-linux64 build -v .
+          GOOS=freebsd GOARCH=amd64 go -o dataplaneapi-freebsd build -v .
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1
@@ -22,3 +35,4 @@ jobs:
           release_name: Release ${{ github.ref }}
           draft: false
           prerelease: false
+          artifacts: [ dataplaneapi-mac, dataplaneapi-linux64, dataplaneapi-freebsd ]
