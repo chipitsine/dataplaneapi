@@ -22,9 +22,9 @@ jobs:
           go get -v -t -d ./...
       - name: Build
         run: |
-          GOOS=darwin go -o dataplaneapi-mac build -v .
-          GOOS=linux GOARCH=amd64 go -o dataplaneapi-linux64 build -v .
-          GOOS=freebsd GOARCH=amd64 go -o dataplaneapi-freebsd build -v .
+          GOOS=darwin go build -o dataplaneapi-mac -v .
+          GOOS=linux GOARCH=amd64 go build -o dataplaneapi-linux64 -v .
+          GOOS=freebsd GOARCH=amd64 go build -o dataplaneapi-freebsd -v .
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1
